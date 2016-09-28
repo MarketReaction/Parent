@@ -2,7 +2,7 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.jassoft.markets</groupId>
+    <groupId>uk.co.jassoft.markets</groupId>
     <artifactId>Markets</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -59,17 +59,27 @@
                             <target>1.8</target>
                         </configuration>
                     </plugin>
+
                     <plugin>
-                        <artifactId>maven-clean-plugin</artifactId>
-                        <version>2.6.1</version>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.5.1</version>
+                        <executions>
+                            <execution>
+                                <id>default-deploy</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                         <configuration>
-                            <filesets>
-                                <fileset>
-                                    <directory>shippable</directory>
-                                </fileset>
-                            </filesets>
+                            <serverId>jassoft-nexus</serverId>
+                            <nexusUrl>http://192.168.0.8:8081/nexus/</nexusUrl>
+                            <skipStaging>true</skipStaging>
                         </configuration>
                     </plugin>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
@@ -257,13 +267,13 @@
             </dependency>
 
             <dependency>
-                <groupId>com.jassoft.markets</groupId>
+                <groupId>uk.co.jassoft.markets</groupId>
                 <artifactId>DataModel</artifactId>
                 <version>${project.version}</version>
                 <type>jar</type>
             </dependency>
             <dependency>
-                <groupId>com.jassoft.markets</groupId>
+                <groupId>uk.co.jassoft.markets</groupId>
                 <artifactId>CommonFunctions</artifactId>
                 <version>${project.version}</version>
                 <type>jar</type>
@@ -422,7 +432,7 @@
 
             <!-- Testing -->
             <dependency>
-                <groupId>com.jassoft.markets</groupId>
+                <groupId>uk.co.jassoft.markets</groupId>
                 <artifactId>CommonFunctions</artifactId>
                 <version>${project.version}</version>
                 <type>test-jar</type>
@@ -522,5 +532,20 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <distributionManagement>
+
+        <snapshotRepository>
+            <id>jassoft-snapshots</id>
+            <url>http://192.168.0.8:8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>JassoftRepository</id>
+            <url>http://192.168.0.8:8081</url>
+        </repository>
+    </repositories>
 
 </project>
