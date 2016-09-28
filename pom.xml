@@ -2,10 +2,12 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>uk.co.jassoft.markets</groupId>
     <artifactId>Markets</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>pom</packaging>
+
     <name>Markets</name>
 
     <parent>
@@ -63,22 +65,16 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.5.1</version>
-                        <executions>
-                            <execution>
-                                <id>default-deploy</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>deploy</goal>
-                                </goals>
-                            </execution>
-                        </executions>
+                        <version>1.6.7</version>
+                        <extensions>true</extensions>
                         <configuration>
-                            <serverId>jassoft-nexus</serverId>
-                            <nexusUrl>http://192.168.0.8:8081/nexus/</nexusUrl>
-                            <skipStaging>true</skipStaging>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
+
+
 
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -534,18 +530,10 @@
     </dependencyManagement>
 
     <distributionManagement>
-
         <snapshotRepository>
-            <id>jassoft-snapshots</id>
-            <url>http://192.168.0.8:8081/nexus/content/repositories/snapshots</url>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
-
-    <repositories>
-        <repository>
-            <id>JassoftRepository</id>
-            <url>http://192.168.0.8:8081</url>
-        </repository>
-    </repositories>
 
 </project>
