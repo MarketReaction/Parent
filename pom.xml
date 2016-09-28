@@ -225,7 +225,7 @@
                                 </resources>
                                 <forceTags>true</forceTags>
                                 <imageTags>
-                                    <imageTag>${BUILD_NUMBER}</imageTag>
+                                    <imageTag>${TRAVIS_BUILD_NUMBER}</imageTag>
                                 </imageTags>
                             </configuration>
                             <executions>
