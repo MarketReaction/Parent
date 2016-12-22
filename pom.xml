@@ -216,6 +216,7 @@
                                 <imageName>${docker.image.prefix}/${project.artifactId}:${TRAVIS_BUILD_NUMBER}</imageName>
                                 <newName>${docker.image.prefix}/${project.artifactId}</newName>
                                 <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                                <useConfigFile>true</useConfigFile>
                                 <resources>
                                     <resource>
                                         <targetPath>/</targetPath>
